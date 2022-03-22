@@ -28,7 +28,9 @@ function App() {
 
      <ul>
     `{todoList.map(function (todo) {
-      return <li key={todo.objectID}>{todo.title}</li>;
+      return <li key={todo.id}>{todo.id}
+      <span>: {todo.title}</span>
+        </li>;
     })}`
     </ul>
     <label htmlFor="search ">Search:</label>
