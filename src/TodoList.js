@@ -3,9 +3,9 @@ import TodoListItem from './todoListItem';
 
 const todoList = [
     {
-    id: 1,
-    title: "What to Cook",
-    objectID: 0,
+      id: 1,
+      title: "What to Cook",
+      objectID: 0,
     },
     {
       id: 2,

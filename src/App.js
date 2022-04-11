@@ -1,18 +1,26 @@
 import React from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
+import TodoListItem from './todoListItem';
+
+
+
+
 const title = "Todo List";
 
 
-
-function App() {
+const App = () => {
+  const [newTodo, setNewTodo] = React.useState();
 
   return (
     <div>
       <h1>{title}</h1>
-      <AddTodoForm/>
-    <TodoList/>
-    <Search/>
+      <AddTodoForm onAddTodo={setNewTodo}/>
+      {/* Pass `setNewTodo` as a callback handler prop named `onAddTodo` to the `AddTodoForm` component */}
+      <p>{newTodo}</p>
+      <TodoList />
+      <Search/>
+     
 
     <hr/>
     
@@ -21,13 +29,15 @@ function App() {
   
   }
 
+const Search = () => {
+    const handleChange = (event) => {
+    console.log(event.target.value);
+  };
 
-
-function Search() {
   return(
     <div>
       <label htmlFor="search ">Search:</label>
-    <input id="search" type="text"></input>
+      <input id="search" type="text" onChange={handleChange}></input>
     </div>
   )
 }
