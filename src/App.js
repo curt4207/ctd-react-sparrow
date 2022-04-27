@@ -10,17 +10,24 @@ const title = "Todo List";
 
 
 const App = () => {
-  const [newTodo, setNewTodo] = React.useState();
+  // const [newTodo, setNewTodo] = React.useState();
+  const [todoList, setTodoList] = React.useState([]);
+
+ console.log(todoList)
+ 
+    function addTodo(newTodo) {
+      setTodoList([...todoList, newTodo]);
+    }
 
   return (
     <div>
       <h1>{title}</h1>
-      <AddTodoForm onAddTodo={setNewTodo}/>
+      <AddTodoForm onAddTodo={addTodo}/>
       {/* Pass `setNewTodo` as a callback handler prop named `onAddTodo` to the `AddTodoForm` component */}
-      <p>{newTodo}</p>
-      <TodoList />
+      <p>{}</p>
+      <TodoList todoList={todoList} />
       <Search/>
-     
+    
 
     <hr/>
     
@@ -41,5 +48,7 @@ const Search = () => {
     </div>
   )
 }
+
+
 
 export default App;
