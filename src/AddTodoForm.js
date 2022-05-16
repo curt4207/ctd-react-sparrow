@@ -1,4 +1,5 @@
 import React from "react";
+import InputWithLabel from "./InputWithLabel";
 
 const AddTodoForm = (props) => {
     const {onAddTodo,} = props;
@@ -11,7 +12,7 @@ const AddTodoForm = (props) => {
 
     const handleAddTodo = (event) => {
         event.preventDefault();
-        
+        // event is the parent of preventDefault, preventDefault is a child of event.
         setTodoTitle("");
         onAddTodo(
             {title: todoTitle, id: Date.now()}
@@ -19,15 +20,15 @@ const AddTodoForm = (props) => {
         );
         
     };
-
     return(
+        <React.Fragment>
         <form onSubmit={handleAddTodo}>
-        <label htmlFor="todoTitle"> Title:
-        <input id="todoTitle" value={todoTitle} name="title" onChange={handleTitleChange}/>
-        </label>
+        <InputWithLabel todoTitle={todoTitle} handleTitleChange={handleTitleChange}>Title </InputWithLabel>
         <button type="submit">Add</button>
-        </form>   
+        </form>
+        </React.Fragment> 
     )
+   
 };
 
 export default AddTodoForm;

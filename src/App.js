@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import React from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
-import TodoListItem from './todoListItem';
+import TodoListItem from './TodoListItem';
 
 
 
@@ -10,7 +10,7 @@ import TodoListItem from './todoListItem';
 
 const title = "Todo List";
 
-function useSemiPersistentState () {
+  function useSemiPersistentState () {
   // First you're getting the "savedTodoList" data from localStorage.
   // Then you're parsing that data (which is a JSON string)
   // Then you're passing the parsed data as the first argument to `useState`, which gives the state its default value (what `todoList` starts as)
@@ -24,10 +24,17 @@ function useSemiPersistentState () {
   return [todoList, setTodoList];
 };
 
+
+
+
+
 const App = () => {
   
   const [todoList, setTodoList] = useSemiPersistentState();
   
+  const removeTodo = (id) => {
+      setTodoList(todoList.filter(todo => todo.id !== id));
+    };
 
   function addTodo(newTodo) {
     setTodoList([...todoList, newTodo]);
@@ -39,7 +46,7 @@ const App = () => {
       <AddTodoForm onAddTodo={addTodo}/>
       {/* Pass `setNewTodo` as a callback handler prop named `onAddTodo` to the `AddTodoForm` component */}
       <p>{}</p>
-      <TodoList todoList={todoList} />
+      <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>
       <Search/>
     
 
@@ -50,7 +57,7 @@ const App = () => {
   
   }
 
-const Search = () => {
+  const Search = () => {
     const handleChange = (event) => {
     console.log(event.target.value);
   };
@@ -61,8 +68,10 @@ const Search = () => {
       <input id="search" type="text" onChange={handleChange}></input>
     </div>
   )
-}
 
+
+  
+};
 
 
 export default App;
