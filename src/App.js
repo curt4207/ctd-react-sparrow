@@ -1,42 +1,63 @@
+import {useEffect, useState} from 'react';
 import React from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
-import TodoListItem from './todoListItem';
+import TodoListItem from './TodoListItem';
+
 
 
 
 
 const title = "Todo List";
 
+  function useSemiPersistentState () {
+  // First you're getting the "savedTodoList" data from localStorage.
+  // Then you're parsing that data (which is a JSON string)
+  // Then you're passing the parsed data as the first argument to `useState`, which gives the state its default value (what `todoList` starts as)
+  const [todoList, setTodoList] = useState(JSON.parse(localStorage.getItem("savedTodoList")));
+
+  console.log(todoList);
+  
+  useEffect(() => {
+    localStorage.setItem("savedTodoList", JSON.stringify(todoList));
+  },[todoList]);
+  return [todoList, setTodoList];
+};
+
+
+
+
 
 const App = () => {
-  // const [newTodo, setNewTodo] = React.useState();
-  const [todoList, setTodoList] = React.useState([]);
+  
+  const [todoList, setTodoList] = useSemiPersistentState();
+  
+  const removeTodo = (id) => {
+      setTodoList(todoList.filter(todo => todo.id !== id));
+    };
 
- console.log(todoList)
- 
-    function addTodo(newTodo) {
-      setTodoList([...todoList, newTodo]);
+  function addTodo(newTodo) {
+    setTodoList([...todoList, newTodo]);
     }
 
   return (
-    <div>
+    <React.Fragment>
       <h1>{title}</h1>
       <AddTodoForm onAddTodo={addTodo}/>
       {/* Pass `setNewTodo` as a callback handler prop named `onAddTodo` to the `AddTodoForm` component */}
       <p>{}</p>
-      <TodoList todoList={todoList} />
+      <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>
       <Search/>
     
 
     <hr/>
     
-    </div>
+    </React.Fragment>
    );
   
   }
 
-const Search = () => {
+  const Search = () => {
     const handleChange = (event) => {
     console.log(event.target.value);
   };
@@ -47,8 +68,10 @@ const Search = () => {
       <input id="search" type="text" onChange={handleChange}></input>
     </div>
   )
-}
 
+
+  
+};
 
 
 export default App;

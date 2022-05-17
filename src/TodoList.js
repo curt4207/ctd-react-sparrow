@@ -1,5 +1,5 @@
 import React from 'react';
-import TodoListItem from './todoListItem';
+import TodoListItem from './TodoListItem';
 
 
 function TodoList(props){
@@ -8,7 +8,7 @@ function TodoList(props){
       <ul>
       {todoList.map(function (todo){
           return (
-           <TodoListItem key={todo.id} todo={todo}/>
+           <TodoListItem key={todo.id} todo={todo} onRemoveTodo={props.onRemoveTodo}/>
 
           )
       })}
