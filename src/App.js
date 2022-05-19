@@ -9,28 +9,40 @@ import TodoListItem from './TodoListItem';
 
 
 const title = "Todo List";
-
-  function useSemiPersistentState () {
   // First you're getting the "savedTodoList" data from localStorage.
   // Then you're parsing that data (which is a JSON string)
   // Then you're passing the parsed data as the first argument to `useState`, which gives the state its default value (what `todoList` starts as)
-  const [todoList, setTodoList] = useState(JSON.parse(localStorage.getItem("savedTodoList")));
+
+const App = () => {
+  const [todoList, setTodoList] = useState([]);
+  
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const promise = new Promise((resolve, reject) => {
+      
+      setTimeout(() =>{
+        resolve({data:{todoList:JSON.parse(localStorage.getItem("savedTodoList"))}})
+      }, 2000) 
+    })
+    promise.then(
+      (result) => {
+        console.log(result);
+        setTodoList(result.data.todoList)
+        setIsLoading(false)
+      }
+    )
+  },[])
 
   console.log(todoList);
   
   useEffect(() => {
+    if(isLoading === false){
     localStorage.setItem("savedTodoList", JSON.stringify(todoList));
+    }
   },[todoList]);
-  return [todoList, setTodoList];
-};
-
-
-
-
-
-const App = () => {
   
-  const [todoList, setTodoList] = useSemiPersistentState();
+  
   
   const removeTodo = (id) => {
       setTodoList(todoList.filter(todo => todo.id !== id));
@@ -45,8 +57,8 @@ const App = () => {
       <h1>{title}</h1>
       <AddTodoForm onAddTodo={addTodo}/>
       {/* Pass `setNewTodo` as a callback handler prop named `onAddTodo` to the `AddTodoForm` component */}
-      <p>{}</p>
-      <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>
+      <p>{isLoading ? "Loading..." : (<TodoList todoList={todoList} onRemoveTodo={removeTodo}/>)}</p>
+      
       <Search/>
     
 
