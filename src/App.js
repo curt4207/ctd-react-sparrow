@@ -6,8 +6,6 @@ import TodoListItem from './TodoListItem';
 
 
 
-
-
 const title = "Todo List";
   // First you're getting the "savedTodoList" data from localStorage.
   // Then you're parsing that data (which is a JSON string)
@@ -19,14 +17,9 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const promise = new Promise((resolve, reject) => {
-
-        fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`)
-        .then((response) => response.jason())
-        .then((data) => {console.log(data);
-        }).catch((error) => console.log(error))
-        .finally(() => setIsLoading(false))
-      }, [])
+    const promise = fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`, {headers:{Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`}})
+        .then((response) => response.json()).catch((error) => console.log(error))
+        .finally(() => setIsLoading(false));
       
        
       // setTimeout(() =>{
@@ -36,7 +29,7 @@ const App = () => {
     promise.then(
       (result) => {
         console.log(result);
-        setTodoList(result.data.todoList)
+        setTodoList(result.records)
         setIsLoading(false)
       }
     )
