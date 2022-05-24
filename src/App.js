@@ -20,11 +20,19 @@ const App = () => {
 
   useEffect(() => {
     const promise = new Promise((resolve, reject) => {
+
+        fetch(`https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`)
+        .then((response) => response.jason())
+        .then((data) => {console.log(data);
+        }).catch((error) => console.log(error))
+        .finally(() => setIsLoading(false))
+      }, [])
       
-      setTimeout(() =>{
-        resolve({data:{todoList:JSON.parse(localStorage.getItem("savedTodoList"))}})
-      }, 2000) 
-    })
+       
+      // setTimeout(() =>{
+      //   resolve({data:{todoList:JSON.parse(localStorage.getItem("savedTodoList"))}})
+      // }, 2000) 
+    
     promise.then(
       (result) => {
         console.log(result);
@@ -57,7 +65,7 @@ const App = () => {
       <h1>{title}</h1>
       <AddTodoForm onAddTodo={addTodo}/>
       {/* Pass `setNewTodo` as a callback handler prop named `onAddTodo` to the `AddTodoForm` component */}
-      <p>{isLoading ? "Loading..." : (<TodoList todoList={todoList} onRemoveTodo={removeTodo}/>)}</p>
+      {isLoading ?<p> "Loading..."</p> : (<TodoList todoList={todoList} onRemoveTodo={removeTodo}/>)}
       
       <Search/>
     
