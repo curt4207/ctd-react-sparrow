@@ -1,13 +1,42 @@
 import React from "react";
-import TodoList from "./TodoList";
+//Imported Components 
+import style from './TodoListItem.module.css';
+import { motion } from "framer-motion";
+import { Card, CardContent, Typography, CardActions, createTheme,ThemeProvider, responsiveFontSizes} from '@material-ui/core';
 
-const TodoListItem = (props) => {
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
+ 
+const TodoListItem = (props) => { 
     const {todo} = props;
     return(
-        <li key={todo.id}>
-        <span> {todo.fields.Title}</span>
-        <button type="button" onClick={()=>{props.onRemoveTodo(todo.id)}}>Remove</button>
-        </li>
+        <ThemeProvider theme={theme}>
+        <Card style={{width: "min-content", backgroundColor: "lightGrey"}} className={style.card} >   
+        <CardContent >   
+        <div
+        key={todo.id} 
+        className={style.listItem} >
+        <div className={style.cardTitle}>
+            {todo.fields.Title}
+        </div>
+       
+        <CardActions>
+            <Typography gutterBottom>
+        <motion.button 
+            type="button" 
+            className={style.removeButton} 
+            onClick={()=>{props.onRemoveTodo(todo.id)}} 
+            whileHover={{
+                scale: 1.3
+        }}> Remove 
+        </motion.button>
+        </Typography>
+        </CardActions>
+        </div>
+        
+        </CardContent>
+        </Card>
+        </ThemeProvider>
     )
 };
 
