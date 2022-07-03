@@ -1,0 +1,23 @@
+/* .listItem {
+    padding: 1rem;
+    margin: 0.5rem;
+} */
+
+.removeButton{
+    background-color: orange;
+    /* margin: 0.5rem; */
+    padding: 0.2rem;
+    font-size: 0.5rem;
+}
+
+.card {
+    box-sizing: border-box;
+    margin: 1rem 1rem;
+  
+   display: inline-flex;
+}
+
+.cardTitle {
+    font-size: 1.5vw;
+}
+

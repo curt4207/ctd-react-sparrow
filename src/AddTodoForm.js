@@ -1,5 +1,7 @@
 import React from "react";
 import InputWithLabel from "./InputWithLabel";
+import style from "./AddTodoForm.module.css";
+import { motion } from "framer-motion";
 
 const AddTodoForm = (props) => {
     const {onAddTodo,} = props;
@@ -15,16 +17,28 @@ const AddTodoForm = (props) => {
         // event is the parent of preventDefault, preventDefault is a child of event.
         setTodoTitle("");
         onAddTodo(
-            {title: todoTitle, id: Date.now()}
+            // {title: todoTitle, id: Date.now()}
+            {
+                id: Date.now(),
+                fields: {
+                    Title: todoTitle
+                }
+            }
             
         );
         
     };
     return(
         <React.Fragment>
-        <form onSubmit={handleAddTodo}>
+        <form onSubmit={handleAddTodo} className={style.title}>
         <InputWithLabel todoTitle={todoTitle} handleTitleChange={handleTitleChange}>Title </InputWithLabel>
-        <button type="submit">Add</button>
+        
+        <motion.button 
+        type="submit" 
+        className={style.addButton}
+        whileHover={{
+            scale: 1.2
+        }}>Add</motion.button>
         </form>
         </React.Fragment> 
     )
