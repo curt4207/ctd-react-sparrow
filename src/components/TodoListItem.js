@@ -1,6 +1,7 @@
 import React from "react";
 //Imported Components 
 import style from './TodoListItem.module.css';
+import {PropTypes} from "prop-types";
 import { motion } from "framer-motion";
 import { Card, CardContent, Typography, CardActions, createTheme,ThemeProvider, responsiveFontSizes} from '@material-ui/core';
 
@@ -9,17 +10,18 @@ theme = responsiveFontSizes(theme);
  
 const TodoListItem = (props) => { 
     const {todo} = props;
+    
     return(
         <ThemeProvider theme={theme}>
         <Card style={{width: "min-content", backgroundColor: "lightGrey"}} className={style.card} >   
         <CardContent >   
         <div
         key={todo.id} 
-        className={style.listItem} >
+        className={style.listItem} >    
+        
         <div className={style.cardTitle}>
             {todo.fields.Title}
         </div>
-       
         <CardActions>
             <Typography gutterBottom>
         <motion.button 
@@ -38,6 +40,10 @@ const TodoListItem = (props) => {
         </Card>
         </ThemeProvider>
     )
+};
+
+TodoListItem.propTypes = {
+    onRemoveTodo: PropTypes.func
 };
 
 export default TodoListItem; 

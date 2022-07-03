@@ -2,9 +2,10 @@ import React from "react";
 import InputWithLabel from "./InputWithLabel";
 import style from "./AddTodoForm.module.css";
 import { motion } from "framer-motion";
+import {PropTypes} from "prop-types";
 
 const AddTodoForm = (props) => {
-    const {onAddTodo,} = props;
+    const {onAddTodo, } = props;
     const [todoTitle, setTodoTitle] = React.useState("");    
 
     const handleTitleChange = (event) => {
@@ -23,11 +24,10 @@ const AddTodoForm = (props) => {
                 fields: {
                     Title: todoTitle
                 }
-            }
-            
-        );
-        
+            }    
+        );   
     };
+    
     return(
         <React.Fragment>
         <form onSubmit={handleAddTodo} className={style.title}>
@@ -43,6 +43,13 @@ const AddTodoForm = (props) => {
         </React.Fragment> 
     )
    
+};
+
+// define the `propTypes` property of AddTodoForm function as a new object
+// Inside the object, define a property with key `onAddTodo` (prop name) and value `PropTypes.func` (function data type)
+
+AddTodoForm.propTypes = {
+    onAddTodo: PropTypes.func,
 };
 
 export default AddTodoForm;

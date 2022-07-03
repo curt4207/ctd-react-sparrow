@@ -1,0 +1,18 @@
+
+.removeButton{
+    background-color: orange;
+    padding: 0.2rem; 
+}
+
+.card {
+    box-sizing: border-box;
+    margin: 1rem 1rem;
+   display: inline-flex;
+   text-align: center;
+}
+
+.cardTitle {
+ font-family: 'Lucida Sans Regular';
+ font-weight: bold;
+}
+
