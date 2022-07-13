@@ -10,3 +10,12 @@
     font-family: Arial, sans-serif;
     color: antiquewhite;    
 }
+
+.sortButton {
+    background-color: rgb(50, 49, 49);
+    color: antiquewhite;
+    margin-left: 2rem;
+}
+.sortButton:hover {
+    border-color: yellowgreen;
+}

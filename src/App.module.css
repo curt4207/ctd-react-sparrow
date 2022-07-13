@@ -29,3 +29,13 @@ body {
     color: antiquewhite;
     font-family: sans-serif;
 }
+.homePage, .todoListPage {
+    font-size: 1rem;
+   margin: 0.5rem;
+    position: relative;
+    top: 1rem;
+   padding: 0.5rem;
+   color: antiquewhite;
+   background-color: rgb(34, 33, 33);
+   border-radius: 10%;
+}

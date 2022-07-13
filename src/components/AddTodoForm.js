@@ -17,17 +17,20 @@ const AddTodoForm = (props) => {
         event.preventDefault();
         // event is the parent of preventDefault, preventDefault is a child of event.
         setTodoTitle("");
-        onAddTodo(
-            // {title: todoTitle, id: Date.now()}
-            {
-                id: Date.now(),
-                fields: {
-                    Title: todoTitle
-                }
-            }    
-        );   
+        if (todoTitle) {
+            onAddTodo(
+                // {title: todoTitle, id: Date.now()}
+                // {
+                //     id: Date.now(),
+                //     fields: {
+                //         Title: todoTitle
+                //     }
+                // }    
+                todoTitle
+            );   
+        }
     };
-    
+
     return(
         <React.Fragment>
         <form onSubmit={handleAddTodo} className={style.title}>
@@ -38,7 +41,7 @@ const AddTodoForm = (props) => {
         className={style.addButton}
         whileHover={{
             scale: 1.2
-        }}>Add</motion.button>
+        }}>Add </motion.button>
         </form>
         </React.Fragment> 
     )

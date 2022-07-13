@@ -8,9 +8,8 @@ import { Card, CardContent, Typography, CardActions, createTheme,ThemeProvider, 
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
  
-const TodoListItem = (props) => { 
-    const {todo} = props;
-    
+const TodoListItem = ({todo, onRemoveTodo}) => { 
+    // List item is removed to get rid of the bullet points
     return(
         <ThemeProvider theme={theme}>
         <Card style={{width: "min-content", backgroundColor: "lightGrey"}} className={style.card} >   
@@ -27,7 +26,7 @@ const TodoListItem = (props) => {
         <motion.button 
             type="button" 
             className={style.removeButton} 
-            onClick={()=>{props.onRemoveTodo(todo.id)}} 
+            onClick={()=>{onRemoveTodo(todo.id)}} 
             whileHover={{
                 scale: 1.3
         }}> Remove 
@@ -43,7 +42,8 @@ const TodoListItem = (props) => {
 };
 
 TodoListItem.propTypes = {
-    onRemoveTodo: PropTypes.func
+    onRemoveTodo: PropTypes.func,
+    todo: PropTypes.object
 };
 
 export default TodoListItem; 
