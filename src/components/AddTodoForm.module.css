@@ -1,0 +1,16 @@
+.addButton{
+    background-color: green;
+    margin: 5px;
+    padding: 5px;
+    font-size: 1vw;
+}
+.addButton:hover {
+    border-color: yellowgreen;
+}
+
+.title {
+   text-align: center;
+   color: antiquewhite;
+   font-family: 'Times New Roman', Times, serif;
+   font-size: 2vw;
+}
