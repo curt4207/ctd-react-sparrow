@@ -19,13 +19,14 @@ const AddTodoForm = (props) => {
         setTodoTitle("");
         if (todoTitle) {
             onAddTodo(
-                // {title: todoTitle, id: Date.now()}
+           
+        // {title: todoTitle, id: Date.now()}
                 // {
                 //     id: Date.now(),
                 //     fields: {
                 //         Title: todoTitle
                 //     }
-                // }    
+                // }                  
                 todoTitle
             );   
         }

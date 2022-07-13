@@ -11,7 +11,7 @@ body {
     );  
 }
 
-@media(max-width: 400px) {
+@media(max-width: 800px) {
     body {
         background: linear-gradient(
             90deg,
@@ -20,6 +20,7 @@ body {
         );   
     };
 }
+
 
 .todoTitle {
     font-size: 4em;
@@ -38,4 +39,7 @@ body {
    color: antiquewhite;
    background-color: rgb(34, 33, 33);
    border-radius: 10%;
+}
+.homePage:hover, .todoListPage:hover {
+   color: rgb(34, 231, 12);
 }
